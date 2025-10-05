@@ -1,0 +1,21 @@
+name: Cache Speedup Workflow
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        id: cache-step
+        with:
+          path: ~/.cache/my-dependencies
+          key: cache-774efd5
+
+      - name: prime-cache-774efd5
+        run: echo "Cache result: ${{ steps.cache-step.outputs.cache-hit }}"
